@@ -1,10 +1,10 @@
-import Homepage from './pages/Homepage'
-import './App.css'
+import { Outlet } from 'react-router-dom'
 
 function App() {
-
   return (
-    <Homepage/>
+    <div>
+      <Outlet />
+    </div>
   )
 }
 

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function singup() {
+export default function input() {
   return (
     <div>
-      Singup
+      
     </div>
   )
 }

@@ -1,6 +1,9 @@
-import {configureStore} from '@reduxjs/toolkit'
-import countSlise from './Slices/countSlice'
+// src/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import countReducer from '../store/Slices/AuthSlise'; // Import the reducer from countSlice
 
-export const Stored = configureStore({
-    reducer: countSlise
-})
+export const store = configureStore({
+  reducer: {
+    count: countReducer, // Use the slice name as the key
+  },
+});
