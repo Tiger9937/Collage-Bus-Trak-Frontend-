@@ -4,7 +4,7 @@ export default function login() {
   fetchFunction()
   return (
     <div>
-      login
+     hello i am login login
     </div>
   )
 }
