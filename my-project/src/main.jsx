@@ -6,7 +6,7 @@ import {store} from './store/Stored.js'
 import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import {Homepage, Login,Singup} from './pages/pageIndex.js'
-
+import Error from './utils/error/DevError.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,8 +26,9 @@ const router = createBrowserRouter([
           element:(<Login/>)
         },
         {
-
-        }
+          path: "/error",
+          element:(<Error/>)
+        },
     ],
 },
 ])

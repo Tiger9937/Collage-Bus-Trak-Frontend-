@@ -1,15 +1,34 @@
-import {ApiError} from './error/DevError'
 
-
-async function  fetchFunction(url){
+async function  fetchFunction(methord,url,info){
     try {
-        const data = await fetch(url)
+        const data = await fetch(`${'http://localhost:8000/api/v1'+url}`,{
+            method:methord,
+            body:info
+        })
         if (!data) {
-            new ApiError(200,"appleaction Ferch unsussfull")
+            console.log("data is not coming")
         }
-        console.log(await data.json())
+        return await data.json()
     } catch (error) {
         console.log("error",error)
     }
 }
-export {fetchFunction}
+
+async function GetRawData(methord,url,info) {
+        try {
+                const user = await fetch(`${"http://localhost:8000/api/v1"+url}`, {
+                    method: methord, 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(
+                        info
+                    ),
+                })
+                return await user.json()
+        } catch (error) {
+            console.log("error",error)
+        }
+}
+
+export {fetchFunction ,GetRawData}

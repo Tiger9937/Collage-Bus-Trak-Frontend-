@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'deep-purple': '#4B168B',  
+        'golden-yellow': '#FBCF30',   
+      },
+      placecolors: {
+        placeholder: '#ffffff', // Custom placeholder color
+      },
+    },
   },
   plugins: [],
 }
