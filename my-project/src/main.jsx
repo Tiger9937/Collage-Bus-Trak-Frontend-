@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import {Homepage, Login,Singup} from './pages/pageIndex.js'
 import Error from './utils/error/DevError.jsx'
+import {Exparimant} from './components/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         {
           path: "/error",
           element:(<Error/>)
+        },
+        {
+          path: "/Exparimant",
+          element:(<Exparimant/>)
         },
     ],
 },
