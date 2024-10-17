@@ -50,10 +50,12 @@ export default function Signup() {
   return (
     <div>
       {loading && <span>Loading.....</span>}
-      <form className='m-4 space-y-4' onSubmit={handleSubmit(onSubmit)}>
+      <form className='-m-2 space-y-4' onSubmit={handleSubmit(onSubmit)}>
         <Input
           placeholder="Enter Your Name"
-          className="bg-deep-purple placeholder-white border-white"
+          className="bg-deep-purple placeholder-white border-white
+          
+          "
           {...register("Full_Name", {
             validate: {
               matchPattern: (value) => /^[A-Za-z]+ [A-Za-z]+$/.test(value) || "Full name must be a valid name like this -> John Doe"
@@ -84,7 +86,7 @@ export default function Signup() {
   
         <Button
           type='submit'
-          className={`w-full p-3 hover:bg-slate-50 bg-white text-black rounded-lg shadow-lg mt-4 ${loading ? 'animate-wind-flow' : ''}`} // Apply animation class conditionally
+          className={`sm:w-full w-40 ml-16 sm:ml-0 p-3 hover:bg-slate-50 bg-white text-black rounded-3xl sm:rounded-lg shadow-lg mt-4 ${loading ? 'animate-wind-flow' : ''}`} // Apply animation class conditionally
         >
           {loading ? <span>Loading.....</span> : <span>Singup</span>}
         </Button>

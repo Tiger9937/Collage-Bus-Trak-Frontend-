@@ -34,6 +34,10 @@ const router = createBrowserRouter([
           path: "/Exparimant",
           element:(<Exparimant/>)
         },
+        {
+          path: "/BUS",
+          element:(<Exparimant/>)
+        }
     ],
 },
 ])

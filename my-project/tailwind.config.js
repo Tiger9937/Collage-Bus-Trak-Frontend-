@@ -6,18 +6,27 @@ export default {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'strong': '1.5px 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.5)',
+      },
       colors: {
         'deep-purple': '#4B168B',  
         'golden-yellow': '#FBCF30',   
         'deep-purple-OP50':'#7e22ce50',
-        'golden-yellow-OP70':'#fbcf30ab',
+        'golden-Yellow-OP70':'#fbcf30ab',
         'deep-purple-OP70':'#7e22ce70',
-        'Light-purple':'#a16ae5'
+        'Light-purple':'#a16ae5',
+        'light-Dark':'#0000001a',
+        'Difult-color': '#F8FAFC'
       },
       placecolors: {
         placeholder: '#ffffff', // Custom placeholder color
-      },
+      }
     },
+    fontFamily:{
+      Itim: ["Itim", 'cursive'],
+      Inter:["Inter", 'serif']
+    }
   },
   plugins: [],
 }
