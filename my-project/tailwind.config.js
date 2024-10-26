@@ -17,7 +17,12 @@ export default {
         'deep-purple-OP70':'#7e22ce70',
         'Light-purple':'#a16ae5',
         'light-Dark':'#0000001a',
-        'Difult-color': '#F8FAFC'
+        'Difult-color': '#F8FAFC',
+        'DIP-yellow':'#FFD166',
+        'HiLight_purple':'#BA85FF',
+        'cG':'#D7D7D7',
+        'dimLight':'#F2F2F2',
+        'Hover-yellow':'#fac241',
       },
       placecolors: {
         placeholder: '#ffffff', // Custom placeholder color
@@ -25,7 +30,8 @@ export default {
     },
     fontFamily:{
       Itim: ["Itim", 'cursive'],
-      Inter:["Inter", 'serif']
+      Inter:["Inter", 'serif'],
+      AndadaPro:["Andada Pro", "serif"]
     }
   },
   plugins: [],

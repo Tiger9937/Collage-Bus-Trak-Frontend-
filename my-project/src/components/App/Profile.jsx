@@ -1,19 +1,19 @@
 import React from 'react';
 import { UserInfo, UserWork } from '../index'
+
 import { Link } from 'react-router-dom';
 
-const Dashboard = () => {
+const UserDashboard = () => {
 
   const usseractivate = [
-    { ActName: "Projects", Logo: "public/svg/Flipboard.svg" },
-    { ActName: "Bus", Logo: "public/svg/Bus copy.svg" },
-    { ActName: "Research Paper", Logo: "public/svg/Brief.svg" },
-    { ActName: "Notes", Logo: "public/svg/Microsoft OneNote.svg" },
-    { ActName: "Public Info", Logo: "public/svg/User Male.svg" },
-    { ActName: "Project Ideas", Logo: "public/svg/Project Management.svg" },
+    { key:1,ActName: "Projects", Logo: "public/svg/Flipboard.svg" },
+    { key:2,ActName: "Bus", Logo: "public/svg/Bus copy.svg" },
+    { key:3,ActName: "Research Paper", Logo: "public/svg/Brief.svg" },
+    { key:4,ActName: "Notes", Logo: "public/svg/Microsoft OneNote.svg" },
+    { key:5,ActName: "Public Info", Logo: "public/svg/User Male.svg" },
+    { key:6,ActName: "Project Ideas", Logo: "public/svg/Project Management.svg" },
   ]
 
-  
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-8">
 
@@ -33,7 +33,9 @@ const Dashboard = () => {
             {usseractivate.map(
 
               (Activate) => (
-                <Link className="min-h-[50px] flex rounded-md bg-DIP-yellow hover:text-slate-600  hover:bg-Hover-yellow  shadow-xl sm:col-span-3 ">
+                <Link 
+                key={Activate.key}
+                className="min-h-[50px] flex rounded-md bg-DIP-yellow hover:text-slate-600  hover:bg-Hover-yellow  shadow-xl sm:col-span-3 ">
 
                   <div className='h-11 w-11 p-1 m-1 isolate aspect-video  rounded-3xl bg-white  hover:bg-white/50 shadow-lg ring-1 ring-black/5' >
 
@@ -63,4 +65,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UserDashboard;

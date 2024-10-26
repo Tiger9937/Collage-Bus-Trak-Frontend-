@@ -5,9 +5,26 @@ import './index.css'
 import {store} from './store/Stored.js'
 import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import {Homepage, Login,Singup} from './pages/pageIndex.js'
+
+import {
+  Homepage,
+  Login,
+  Singup,
+  ProfilePage
+  } from './pages/pageIndex.js'
+
+
+
+
+
+
+
+
+
+
 import Error from './utils/error/DevError.jsx'
 import {Exparimant} from './components/index.jsx'
+import {AuthLayout} from './components/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,25 +35,48 @@ const router = createBrowserRouter([
         path:"/",
         element: (  <Homepage/> )
      },
-        {
-            path: "/singup",
-            element: ( <Singup/> ),
-        },
-        {
-          path: "/login",
-          element:(<Login/>)
-        },
+     {
+      path: "/login",
+      element: (
+          <AuthLayout authentication={false}>
+              <Login />
+          </AuthLayout>
+      ),
+  },
+  {
+      path: "/signup",
+      element: (
+          <AuthLayout authentication={false}>
+              <Singup />
+          </AuthLayout>
+      ),
+  },
         {
           path: "/error",
           element:(<Error/>)
         },
         {
           path: "/Exparimant",
-          element:(<Exparimant/>)
+          element:(
+          <AuthLayout authentication>
+                    {" "}
+                  <Exparimant/>
+          </AuthLayout>
+          
+
+        )
         },
         {
           path: "/BUS",
           element:(<Exparimant/>)
+        },
+        {
+          path: "/profile",
+          element:(
+          <AuthLayout authentication>
+            <ProfilePage/>
+          </AuthLayout>  
+        )
         }
     ],
 },

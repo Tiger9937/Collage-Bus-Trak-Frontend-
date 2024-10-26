@@ -6,9 +6,16 @@ import Loading from './loading'
 import Sidebar from './sidebar'
 import HomeSvg from './common/home'
 import BusSvg from './common/busSVG'
-import Profile from './common/svg/profile'
+import Profile from './App/Profile'
 import Map from './common/svg/map'
+import Tab from './App/tab'
+import Botm_Nav from './App/Bottom_Nav'
 import Exparimant from './common/Exparimant'
+import Container from './App/container'
+import UserInfo from './App/userInfo'
+import UserWork from './App/userWork'
+import ProfileIcon from './common/svg/profileIcon'
+import AuthLayout from './Auth/AuthLayout'
 
 export{
     Button,
@@ -20,6 +27,13 @@ export{
     HomeSvg,
     BusSvg,
     Exparimant,
+    Map,
+    Tab,
+    Botm_Nav,
+    Container,
     Profile,
-    Map
+    UserInfo,
+    UserWork,
+    ProfileIcon,
+    AuthLayout,
 }

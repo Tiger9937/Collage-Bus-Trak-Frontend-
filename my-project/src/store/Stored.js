@@ -1,9 +1,9 @@
 // src/store.js
 import { configureStore } from '@reduxjs/toolkit';
-import countReducer from '../store/Slices/AuthSlise'; // Import the reducer from countSlice
+import authReducer from './Slices/AuthSlise'; // Update the path if needed
 
 export const store = configureStore({
   reducer: {
-    count: countReducer, // Use the slice name as the key
+    auth: authReducer, // Use 'auth' as the key, matching your component's expectation
   },
 });

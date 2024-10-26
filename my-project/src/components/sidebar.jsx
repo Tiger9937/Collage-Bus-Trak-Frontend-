@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { HomeSvg, BusSvg, Map, Profile } from './index';
+import { HomeSvg, BusSvg, Map, ProfileIcon } from './index';
 
 export default function Sidebar() {
     const [elementPosition, setElementPosition] = useState({});
@@ -9,7 +9,7 @@ export default function Sidebar() {
     const menuItems = [
         { index: 1, name: 'Home', icon: <HomeSvg />, path: '/' },
         { index: 2, name: 'BUS', icon: <BusSvg />, path: '/Bus' },
-        { index: 3, name: 'Profile', icon: <Profile />, path: '/Profile' },
+        { index: 3, name: 'Profile', icon: <ProfileIcon />, path: '/profile' },
         { index: 4, name: 'MAP', icon: <Map />, path: '/Map' }
     ];
 
@@ -45,7 +45,7 @@ export default function Sidebar() {
         <>
             <aside 
                 id="sidebar-multi-level-sidebar"
-                className="bg-slate-50 fixed left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0"
+                className="bg-slate-50 left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0"
                 aria-label="Sidebar">
                 
                 <div id='navItem' className="h-full px-3 py-4 overflow-y-auto">

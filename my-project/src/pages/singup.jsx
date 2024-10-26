@@ -57,7 +57,7 @@ export default function Signup() {
         >
           Skip
         </button>
-      </Link>
+              </Link>
 
               {/* Right Section - Input Fields */}
               <div className="flex-1 flex flex-col justify-center p-8 -mt-24 sm:-mt-0 ">
@@ -80,6 +80,15 @@ export default function Signup() {
                 </div>
               </div>
 
+
+            <span 
+            className=' absolute '>
+            Member ?  
+            <span>
+                Log in
+            </span>
+            </span>
+            
             </div>
     </div>
       
