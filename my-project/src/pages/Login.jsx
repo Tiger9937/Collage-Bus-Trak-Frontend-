@@ -12,7 +12,7 @@ export default function Signup() {
           <img
           style={{
             height: "400px",
-            "margin-top": "-70px",
+            "margintop": "-70px",
           }}
             className='absolute'
             src="public\assets\images\buswationIMAGE.png"

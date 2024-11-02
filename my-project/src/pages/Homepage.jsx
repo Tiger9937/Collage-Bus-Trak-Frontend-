@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '@fontsource/inter';
-import '@expo-google-fonts/itim';
-import { Sidebar , Tab , Container } from '../components';
+import { Sidebar , Tab , Container , Button } from '../components';
+import { useCookies } from 'react-cookie'
 
 export default function Homepage() {
   
   const [isSidebar, setSidebar] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
 
-
-
+ 
 
   const handleSideBarClick = () => {
     setSidebar(!isSidebar);
@@ -52,6 +52,8 @@ export default function Homepage() {
 
 
 
+
+
       {/* Top Navigation  for big display */}
       <div 
         className={`w-full sm:fixed scrollbar-hide items-center justify-between bg-white overflow-x-scroll block 
@@ -74,10 +76,17 @@ export default function Homepage() {
           <Link to='/login' className='ml-6 absolute md:hidden'>
             <img src="public/assets/icons/Double_Right.png" alt="" />
           </Link>
-          <img
+          {isAuthenticated ? <img
             className='h-16 w-16 flex mt-10 items-end mr-4 sm:mt-0 border-solid'
             src="https://res.cloudinary.com/dwbjaa3ng/image/upload/v1726760705/AvterIMG3_owxedr.png" alt="Avatar"
-          />
+          />  : <div>
+              <Button>1</Button>
+              <Button>2</Button>
+          </div>
+
+          }
+         
+           
         </div>
 
         <div className='sm:w-20 h-full pt-2 w-full grid sm:hidden'>
@@ -89,7 +98,7 @@ export default function Homepage() {
       </div>
 
         <Tab/>    
-          <Container/>
+        <Container/>
     
 
     </div>

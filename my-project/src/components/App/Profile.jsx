@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { UserInfo, UserWork } from '../index'
-
 import { Link } from 'react-router-dom';
 
 const UserDashboard = () => {
-
   const usseractivate = [
     { key:1,ActName: "Projects", Logo: "public/svg/Flipboard.svg" },
     { key:2,ActName: "Bus", Logo: "public/svg/Bus copy.svg" },
@@ -13,7 +11,6 @@ const UserDashboard = () => {
     { key:5,ActName: "Public Info", Logo: "public/svg/User Male.svg" },
     { key:6,ActName: "Project Ideas", Logo: "public/svg/Project Management.svg" },
   ]
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-8">
 

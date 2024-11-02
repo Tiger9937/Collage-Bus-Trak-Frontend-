@@ -7,6 +7,8 @@ import { Navigate } from 'react-router-dom';
 import { DataStorege } from './../../store/ComponentStore';
 import { Loading } from '../index';
 
+
+
 export default function Signup() {
   const { register, handleSubmit, formState: { errors }} = useForm();
   const [error, setError] = useState('');
@@ -14,9 +16,11 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   
-
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, event) => {
+    console.log("ClickEvent: ", event);
     try {
+      event.preventDefault();
+
       const fullname = data.Full_Name;
       const usename = fullname.split(' ')[0];
       const password = data.password;
@@ -30,7 +34,7 @@ export default function Signup() {
       
       setLoading(true);
       const user = await fetchFunction('POST', '/users/regidter', formData);
-      console.log(user)
+      console.log(user);
       if (user.success) {
         setRedirect(true);
         DataStorege(usename, true, true);
@@ -41,7 +45,7 @@ export default function Signup() {
       setErrorState(true);
       setError(error.message);
     }
-  }
+  };
 
   if (redirect) {
     return <Navigate to='/login' />;
@@ -50,12 +54,10 @@ export default function Signup() {
   return (
     <div>
       {loading && <span>Loading.....</span>}
-      <form className='-m-2 space-y-4' onSubmit={handleSubmit(onSubmit)}>
+      <form className='-m-2 space-y-4' onSubmit={handleSubmit((data, event) => onSubmit(data, event))}>
         <Input
           placeholder="Enter Your Name"
-          className="bg-deep-purple placeholder-white border-white
-          
-          "
+          className="bg-deep-purple placeholder-white border-white"
           {...register("Full_Name", {
             validate: {
               matchPattern: (value) => /^[A-Za-z]+ [A-Za-z]+$/.test(value) || "Full name must be a valid name like this -> John Doe"
@@ -88,26 +90,15 @@ export default function Signup() {
           type='submit'
           className={`sm:w-full w-40 ml-16 sm:ml-0 p-3 hover:bg-slate-50 bg-white text-black rounded-3xl sm:rounded-lg shadow-lg mt-4 ${loading ? 'animate-wind-flow' : ''}`} // Apply animation class conditionally
         >
-          {loading ? <span>Loading.....</span> : <span>Singup</span>}
+          {loading ? <span>Loading.....</span> : <span>Signup</span>}
         </Button>
       </form>
-      {
-        loading && <Loading/>
-      }
- 
-          
+      
+      {loading && <Loading/>}
       {errors.Full_Name && <Errors>{errors.Full_Name.message}</Errors>}
       {errors.email && <Errors>{errors.email.message}</Errors>}
       {errors.password && <Errors>{errors.password.message}</Errors>}
       {errorState && <Errors>{error}</Errors>}
-      
     </div>
   );
 }
-
-// style={{
-//   position: "absolute",
-//   top: "274px",
-//   right: "0px",
-//   left: "300px"
-// }}

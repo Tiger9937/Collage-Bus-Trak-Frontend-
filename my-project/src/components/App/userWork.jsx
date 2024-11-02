@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function userWork() {
   const [collageName, SetcollageName] = useState('academy OF technocrat')
+  const [Hover , setHover] = useState(false)
 
   return (
     <div className="basis-[90%] rounded-3xl rounded-b-lg bg-HiLight_purple shadow-black shadow-5 ">
@@ -11,12 +12,14 @@ export default function userWork() {
      
 
       <div className='flex justify-center'>
-        <button className='flex justify-center h-11 w-96 bg-dimLight rounded-md font-AndadaPro'>
+
+        <button className='flex justify-center h-11 w-96 bg-dimLight rounded-md font-AndadaPro hover:bg-white' >
           <Link className='mt-1 '>
             <img src="public\svg\Addicon.svg" alt="" />
           </Link>
           <span className='mt-2 ml-2'>Follow</span>
         </button>
+
       </div>
 
      

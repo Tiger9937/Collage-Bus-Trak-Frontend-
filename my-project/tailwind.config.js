@@ -24,6 +24,9 @@ export default {
         'dimLight':'#F2F2F2',
         'Hover-yellow':'#fac241',
       },
+      width:{
+        "120" : "26rem"
+      },
       placecolors: {
         placeholder: '#ffffff', // Custom placeholder color
       }

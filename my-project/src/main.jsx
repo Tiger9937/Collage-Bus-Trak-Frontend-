@@ -15,7 +15,7 @@ import {
 
 
 
-
+  import { CookiesProvider } from 'react-cookie'; 
 
 
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       ),
   },
   {
-      path: "/signup",
+      path: "/singup",
       element: (
           <AuthLayout authentication={false}>
               <Singup />
@@ -58,12 +58,7 @@ const router = createBrowserRouter([
         {
           path: "/Exparimant",
           element:(
-          <AuthLayout authentication>
-                    {" "}
                   <Exparimant/>
-          </AuthLayout>
-          
-
         )
         },
         {
@@ -90,8 +85,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}>
-    <RouterProvider router={router}/> 
-    </Provider>
+     <CookiesProvider>
+          <Provider store={store}>
+          <RouterProvider router={router}/> 
+          </Provider>
+    </CookiesProvider>
   </StrictMode>,
 )
