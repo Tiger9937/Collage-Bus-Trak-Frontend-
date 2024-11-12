@@ -10,7 +10,8 @@ import {
   Homepage,
   Login,
   Singup,
-  ProfilePage
+  ProfilePage,
+  Rigstation
   } from './pages/pageIndex.js'
 
 
@@ -72,7 +73,14 @@ const router = createBrowserRouter([
             <ProfilePage/>
           </AuthLayout>  
         )
-        }
+        },
+        {
+          path: "/studentRigster",
+          element:(
+                     <Rigstation/>
+          )
+        },
+        
     ],
 },
 ])

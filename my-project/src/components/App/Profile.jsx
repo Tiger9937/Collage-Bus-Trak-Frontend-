@@ -53,7 +53,7 @@ const UserDashboard = () => {
       </div>
 
 
-      <div className="bg-yellow-300 h-full rounded-lg">
+      <div className="bg-Hover-yellow h-full rounded-lg">
 
       </div>
 

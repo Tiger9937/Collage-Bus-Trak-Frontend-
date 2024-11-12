@@ -11,6 +11,7 @@ export default {
       },
       colors: {
         'deep-purple': '#4B168B',  
+        "hover-purpal": "#743fb7",
         'golden-yellow': '#FBCF30',   
         'deep-purple-OP50':'#7e22ce50',
         'golden-Yellow-OP70':'#fbcf30ab',
@@ -23,6 +24,8 @@ export default {
         'cG':'#D7D7D7',
         'dimLight':'#F2F2F2',
         'Hover-yellow':'#fac241',
+        'BLACK' : "#262626",
+        "Nut-PUR" : "#8E54DA"
       },
       width:{
         "120" : "26rem"
@@ -34,7 +37,8 @@ export default {
     fontFamily:{
       Itim: ["Itim", 'cursive'],
       Inter:["Inter", 'serif'],
-      AndadaPro:["Andada Pro", "serif"]
+      AndadaPro:["Andada Pro", "serif"],
+      Assistant: ["Assistant", "sans-serif"]
     }
   },
   plugins: [],

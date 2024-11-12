@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Andada+Pro:ital,wght@0,400..840;1,400..840&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Andada+Pro:ital,wght@0,400..840;1,400..840&family=Assistant:wght@200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -39,3 +40,53 @@
   
   display: block;
 }
+
+
+/* Calendar container styling */
+.custom-calendar {
+  background: linear-gradient(135deg, #9c27b0, #3f51b5); /* Purple gradient background */
+  border-radius: 1rem;
+  padding: 1rem;
+  color: #f5f5f5; /* Light text color */
+}
+
+/* Header styling */
+.custom-calendar .react-datepicker__header {
+  background: none; /* Transparent to show gradient background */
+  border-bottom: none;
+}
+
+/* Month and day names styling */
+.custom-calendar .react-datepicker__current-month,
+.custom-calendar .react-datepicker__day-names {
+  color: #d1c4e9; /* Light purple for text */
+}
+
+/* Day styling */
+.custom-calendar .react-datepicker__day,
+.custom-calendar .react-datepicker__day-name {
+  color: #e0e0e0; /* Light color for days */
+}
+
+/* Selected day styling */
+.custom-calendar .react-datepicker__day--selected,
+.custom-calendar .react-datepicker__day--keyboard-selected {
+  background-color: #673ab7; /* Dark purple for selected day */
+  color: #ffffff; /* White text for selected day */
+}
+
+/* Weekend (Saturdays) styling */
+.custom-calendar .react-datepicker__day--weekend {
+  color: #ff9800; /* Orange color for weekends */
+}
+
+/* Navigation arrows */
+.custom-calendar .react-datepicker__navigation-icon::before {
+  border-color: #f5f5f5; /* Light color for navigation arrows */
+}
+
+/* Corner rounding for the container */
+.custom-calendar .react-datepicker__month-container {
+  border-radius: 1rem;
+}
+

@@ -16,6 +16,7 @@ import UserInfo from './App/userInfo'
 import UserWork from './App/userWork'
 import ProfileIcon from './common/svg/profileIcon'
 import AuthLayout from './Auth/AuthLayout'
+import StudentRigster from './App/student/studentRigster'
 
 export{
     Button,
@@ -36,4 +37,5 @@ export{
     UserWork,
     ProfileIcon,
     AuthLayout,
+    StudentRigster
 }
