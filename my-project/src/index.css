@@ -44,22 +44,38 @@
 
 /* Calendar container styling */
 .custom-calendar {
-  background: linear-gradient(135deg, #9c27b0, #3f51b5); /* Purple gradient background */
+  /* background: linear-gradient(135deg, #9c27b0, #3f51b5); Purple gradient background */
+  background: #8E54DA;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 1.3rem;
   color: #f5f5f5; /* Light text color */
 }
 
 /* Header styling */
 .custom-calendar .react-datepicker__header {
-  background: none; /* Transparent to show gradient background */
+  background: none;
   border-bottom: none;
 }
 
 /* Month and day names styling */
-.custom-calendar .react-datepicker__current-month,
+.custom-calendar
+.react-datepicker__current-month{
+  position: absolute;
+  width: 10rem;
+  left: 2.5rem;
+  top: -12px;
+  border-radius: 5px;
+  color: #ffffff;
+}
+.custom-calendar .react-datepicker__navigation-icon::before {
+  display: flex;
+  border-color: #f5f5f5; /* Light color for navigation arrows */
+}
+/* wikw */
 .custom-calendar .react-datepicker__day-names {
+  padding-top: 1.5rem;
   color: #d1c4e9; /* Light purple for text */
+
 }
 
 /* Day styling */
@@ -74,19 +90,24 @@
   background-color: #673ab7; /* Dark purple for selected day */
   color: #ffffff; /* White text for selected day */
 }
-
+.custom-calendar .react-datepicker__day {
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: #ffffff; /* Default color for weekdays */
+}
 /* Weekend (Saturdays) styling */
 .custom-calendar .react-datepicker__day--weekend {
-  color: #ff9800; /* Orange color for weekends */
+  color: #eb9b23; /* Orange color for weekends */
 }
 
+
+
 /* Navigation arrows */
-.custom-calendar .react-datepicker__navigation-icon::before {
-  border-color: #f5f5f5; /* Light color for navigation arrows */
-}
+
 
 /* Corner rounding for the container */
 .custom-calendar .react-datepicker__month-container {
-  border-radius: 1rem;
+  border-radius: rem;
 }
 

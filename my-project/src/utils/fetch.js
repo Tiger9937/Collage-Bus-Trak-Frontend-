@@ -1,4 +1,4 @@
-
+//POST
 async function  fetchFunction(methord,url,info){
     try {
         const data = await fetch(`${'http://localhost:8000/api/v1'+url}`,{
@@ -13,7 +13,7 @@ async function  fetchFunction(methord,url,info){
         console.log("error",error)
     }
 }
-
+// POST
 async function GetRawData(methord,url,info) {
         try {
                 const user = await fetch(`${"http://localhost:8000/api/v1"+url}`, {
@@ -30,7 +30,8 @@ async function GetRawData(methord,url,info) {
             console.log("error",error)
         }
 }
-
+// GET
+// TODO:: Handle Remove this /users/c/
 async function GetparamsData(info , AuthorizationTokeen) {
    
     try {
@@ -41,9 +42,7 @@ async function GetparamsData(info , AuthorizationTokeen) {
                 'Authorization':AuthorizationTokeen 
             },
         });
-        
-        console.log(response);
-    
+
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -54,7 +53,12 @@ async function GetparamsData(info , AuthorizationTokeen) {
         return null;  // Return null or handle as needed
     }
 }
+// GET
+async function GetPublicParamsData(info) {
+   const GetData  = await fetch(`http://localhost:8000/api/v1/${info}`);
+   return GetData.json()
+
+}
 
 
-
-export {fetchFunction ,GetRawData , GetparamsData}
+export {fetchFunction ,GetRawData , GetparamsData , GetPublicParamsData}

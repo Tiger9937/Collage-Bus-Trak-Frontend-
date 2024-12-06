@@ -9,7 +9,8 @@ export default {
       boxShadow: {
         'strong': '1.5px 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.5)',
       },
-      colors: {
+      colors: { 
+        
         'deep-purple': '#4B168B',  
         "hover-purpal": "#743fb7",
         'golden-yellow': '#FBCF30',   

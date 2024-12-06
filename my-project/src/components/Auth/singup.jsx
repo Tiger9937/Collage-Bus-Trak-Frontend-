@@ -68,9 +68,7 @@ export default function Signup() {
         <Input
           placeholder="Enter Your Email"
           className="bg-deep-purple placeholder-white border-white"
-          {...register("email", {
-            required: "Email is required",
-            validate: {
+          {...register("email", { required: "Email is required", validate: {
               matchPattern: (value) =>
                 /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                 "Email address must be a valid address",
@@ -88,7 +86,7 @@ export default function Signup() {
   
         <Button
           type='submit'
-          className={`sm:w-full w-40 ml-16 sm:ml-0 p-3 hover:bg-slate-50 bg-white text-black rounded-3xl sm:rounded-lg shadow-lg mt-4 ${loading ? 'animate-wind-flow' : ''}`} // Apply animation class conditionally
+          className={`sm:w-full w-40 ml-16 sm:ml-0 p-3  hover:bg-slate-50 bg-white  text-black  shadow-lg mt-4 ${loading ? 'animate-wind-flow' : ''}`} // Apply animation class conditionally
         >
           {loading ? <span>Loading.....</span> : <span>Signup</span>}
         </Button>

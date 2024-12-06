@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div>
-      <Botm_Nav/>
+      {/* <Botm_Nav/> */}
       <Outlet />
     </div>
   )
