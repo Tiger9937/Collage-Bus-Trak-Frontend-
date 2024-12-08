@@ -8,14 +8,21 @@
 
   // import {MultiREF} from '../../../utils/ref'
   // TODO:: When user prase enter than going to next fild if all fild is fill than go the gigster button
+ //  TDDO:: applay loding animation inall over the page with alate
+ //   TODO:: Fix the BUG That Apiar in React form
+//   TODO:: Writing the logic in backend for collage rigstion
+
+
 
 
  export default function mainform({CollageID}) {
     const [addressSame, setAddressSame] = useState(false);
     const [DataClone , setDateClon] = useState({})
     const [Home_DataClone , setHome_DateClon] = useState({})
-    const [previusVal , setpreviusVal] = useState([{Name:"",targetValue:""}])
-    const inputRef = useRef(null)
+    const [previusVal , setpreviusVal] = useState([{Name:"",target:""}])
+    const [IsLoding , setIsLoading] = useState(false)
+    const originalRef = useRef(null)
+    const cloneRef = useRef(null)
 
     const{register , handleSubmit,
       formState: { errors },
@@ -25,7 +32,11 @@
     
         
     const onSubmit = (data) => {
-      
+
+      setIsLoading(!IsLoding)
+
+      console.log(IsLoding)
+
       console.log(data)
 
       function calculateAge(birthDateString) {
@@ -44,6 +55,7 @@
       
         return age;
       }
+
       const AGE = calculateAge(data?.DOB)
       console.log("AGE->",AGE)
       
@@ -57,37 +69,43 @@
           "age" : AGE,
           "Gender":data?.Gender,
     "Address": {
-        "countrie": "USA",
-        "state": "California",
-        "District": "Los Angeles",
-        "at": "1234",
-        "po": "90001",
-        "Village": "Westwood",
-        "city": "Los Angeles",
-        "pincode": "90001",
-        "Nearer_Landmark": "Near Sunset Boulevard"
+        "countrie": data?.selectCountry,
+        "state": data?.selectState,
+        // TODO:: Separate this atpost
+        "District": data?.atpo,
+        "at": data?.atpo,
+        "po": data?.atpo,
+        // TODO:: Handle if village filsd is not comming
+        "Village": data?.Village_Area,
+        "city": data?.City,
+        "pincode": data?.Pin_code,
+        "Nearer_Landmark": data?.Nearest_Landmark
     },
     "Living_address": {
-        "countrie": "USA",
-        "state": "California",
-        "District": "Los Angeles",
-        "at": "5678",
-        "po": "90002",
-        "Village": "Hollywood",
-        "city": "Los Angeles",
-        "pincode": "90002",
-        "Nearer_Landmark": "Near Hollywood Sign"
+      "countrie": data?.Home_selectCountry,
+      "state": data?.Home_selectState,
+      // TODO:: Separate this atpost
+      "District": data?.Home_atpo,
+      "at": data?.Home_atpo,
+      "po": data?.Home_atpo,
+      // TODO:: Handle if village filsd is not comming
+      "Village": data?.Home_Village_Area,
+      "city": data?.Home_City,
+      "pincode": data?.Home_Pin_code,
+      "Nearer_Landmark": data?.Home_Nearest_Landmark
     }
       }
 
-
-        
       console.log(data)
-       // const rigster = GetRawData('POST', "/collage/collageRigster" , Student_Registration_Required_Data)
+      // const rigster = GetRawData('POST', "/collage/collageRigster" , Student_Registration_Required_Data)
+       // TODO:: pass that data in Student Profile 
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 200);
 
     }
 
-    // asing the privius value when the user is un teke the chake box
+    // asing the privius  when the user is un teke the chake box
 
     useEffect(()=>{
           if (addressSame) {
@@ -95,7 +113,7 @@
             setHome_DateClon({...watch()})
           }
           if(!addressSame){
-            inputRef.current.value = null
+            inputRef.current. = null
             setDateClon(undefined)
             setHome_DateClon(undefined)
           }
@@ -107,17 +125,17 @@
             for(let i=0 ; i < Htmlelement.length ;i++){
               
               if (Htmlelement[i].name == previusVal[i+1]?.Name ) {
-                Htmlelement[i].value =  previusVal[i+1]?.targetValue
+                Htmlelement[i]. =  previusVal[i+1]?.target
               }
 
             }
           }
          
-    },[addressSame , setDateClon , setHome_DateClon , watch])
+    },[watch,addressSame , setDateClon ,previusVal, setHome_DateClon ])
   
-    const assignPrevvalue  = (event) =>{
+    const assignPrev  = (event) =>{
         const TragetName = event.target?.name
-        const TargetValue  = event.target?.value
+        const Target  = event.target?.
         
       setpreviusVal((preval)=>UpdatePriveVal(preval))
       function UpdatePriveVal(preval) {
@@ -126,11 +144,11 @@
         let TrgetdObj = [...preval].find((name)=> name.Name === TragetName) || undefined
 
          if(TrgetdObj){
-          TrgetdObj.targetValue = TargetValue
+          TrgetdObj.target = Target
           setval = [...preval]
          }
          else{
-          setval = [...preval,{Name:TragetName,targetValue:TargetValue}]
+          setval = [...preval,{Name:TragetName,target:Target}]
          }
          return setval
       }
@@ -154,8 +172,8 @@
                             {...register("Mobile_Number", {
                               required: "Mobile Number is required",
                               validate: {
-                                matchPattern: (value) =>
-                                  /^\+?[1-9]\d{1,14}$/.test(value) || "Invalid mobile number"
+                                matchPattern: () =>
+                                  /^\+?[1-9]\d{1,14}$/.test() || "Invalid mobile number"
                               }
                             })}
                               LacleClass = "font-Assistant text-BLACK font-bold text-md"
@@ -241,7 +259,7 @@
             <div className="flex gap-4">
 
             <div className="relative w-full md:w-1/2">
-                <select  {...register("selectCountry")} value={DataClone?.selectCountry} className=" focus:text-black w-full text-white bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl  appearance-none">
+                <select  {...register("selectCountry")} className=" focus:text-black w-full text-white bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl  appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base  rounded-xl'>Albania</option>
                         <option className='text-base  rounded-xl'>Algeria</option>
@@ -253,7 +271,7 @@
 
                 <div className="relative w-full md:w-1/2">
 
-                <select {...register("selectState")} value={DataClone?.selectState} className=" focus:text-black w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
+                <select {...register("selectState")} className=" focus:text-black w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl'>Albania</option>
@@ -270,26 +288,26 @@
             <Input
                id=":r1:"
               {...register("atpo")}
-              value={DataClone?.atpo}
+              
                 placeholder="AT/PO"
                 className= " focus:text-black bg-Nut-PUR  border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"
           />
     
 
 
-            <Input id=":r2:" {...register("Village_Area")} value={DataClone?.Village_Area} type="text" placeholder="Village / Area" className="bg-Nut-PUR focus:text-black  border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+            <Input id=":r2:" {...register("Village_Area")} type="text" placeholder="Village / Area" className="bg-Nut-PUR focus:text-black  border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             <div className="flex gap-4">
-              <Input  {...register("City")} value={DataClone?.City} type="text" placeholder="City" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
-              <Input {...register("Pin_code")} value={DataClone?.Pin_code} type="text" placeholder="Pin code" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+              <Input  {...register("City")}  type="text" placeholder="City" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+              <Input {...register("Pin_code")}  type="text" placeholder="Pin code" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             </div>
-            <Input {...register("Nearest_Landmark")} value={DataClone?.Nearest_Landmark} type="text" placeholder="Nearest Landmark" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+            <Input {...register("Nearest_Landmark")} type="text" placeholder="Nearest Landmark" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
           </div>
           
         </div>
         
       
         {/* Home Address Section */}
-        <form ref={inputRef} onBlur={assignPrevvalue}>
+        <form ref={inputRef}>
         <span className=' flex justify-center'>
                 <div className="text-lg flex justify-center font-bold w-44 text-BLACK bg-DIP-yellow font-Assistant rounded-3xl mb-4">
                     <span className='pl-4 text-lg -mt-[1px] mr-4 '>Home Address </span>
@@ -301,7 +319,7 @@
 
 
             <div className="relative w-full md:w-1/2">
-                <select  onChange={assignPrevvalue} {...register("Home_selectCountry") }  value={Home_DataClone?.selectCountry} className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
+                <select   {...register("Home_selectCountry") }  className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base  rounded-xl'>Albania</option>
                         <option className='text-base  rounded-xl'>Algeria</option>
@@ -313,7 +331,7 @@
 
                 <div className="relative w-full md:w-1/2">
 
-                <select onChange={assignPrevvalue} {...register("Home_selectState")}  value={Home_DataClone?.selectState} className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
+                <select  {...register("Home_selectState")}   className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl'>Albania</option>
@@ -328,9 +346,9 @@
             </div>
 
             <Input
-                onChange={assignPrevvalue}
+                
                 {...register("Home_atpo")}
-                value = {Home_DataClone?.atpo}
+                 
                 placeholder="AT/PO"
                 className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"
           />
@@ -338,17 +356,17 @@
 
 
             <Input  
-            onChange={assignPrevvalue}
-            {...register("Home_Village_Area")} value = {Home_DataClone?.Village_Area}   type="text" placeholder="Village / Area" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+           
+            {...register("Home_Village_Area")}    type="text" placeholder="Village / Area" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             <div className="flex gap-4">
               <Input   
-              onChange={assignPrevvalue}
-              {...register("Home_City")} value = {Home_DataClone?.City } type="text" placeholder="City" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
-              <Input onChange={assignPrevvalue} {...register("Home_Pin_code")} value = {Home_DataClone?.Pin_code} type="text" placeholder="Pin code" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+             
+              {...register("Home_City")}   type="text" placeholder="City" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+              <Input  {...register("Home_Pin_code")}   type="text" placeholder="Pin code" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             </div>
             <Input  
-              onChange={assignPrevvalue}
-              {...register("Home_Nearest_Landmark")} value = {Home_DataClone?.Nearest_Landmark} type="text" placeholder="Nearest Landmark" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+              
+              {...register("Home_Nearest_Landmark")}   type="text" placeholder="Nearest Landmark" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
           </div>
 
         </form>
@@ -386,7 +404,13 @@
 
               <div className=''>
                     <button type='submit' className="w-52 text-lg font-bold h-[3rem] -mt-10 p-3 hover:bg-Hover-yellow bg-golden-yellow text-BLACK rounded-lg shadow-lg " >
-                        Register
+                      {
+                        IsLoding ? 'Loading....' : 'Register'
+                      }
+                        
+                        
+                        
+
                     </button>
               </div>
               
