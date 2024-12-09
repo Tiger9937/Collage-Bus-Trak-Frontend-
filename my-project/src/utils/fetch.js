@@ -14,12 +14,13 @@ async function  fetchFunction(methord,url,info){
     }
 }
 // POST
-async function GetRawData(methord,url,info) {
+async function GetRawData(methord,url,info,AuthorizationTokeen) {
         try {
                 const user = await fetch(`${"http://localhost:8000/api/v1"+url}`, {
                     method: methord, 
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization':AuthorizationTokeen 
                     },
                     body: JSON.stringify(
                         info

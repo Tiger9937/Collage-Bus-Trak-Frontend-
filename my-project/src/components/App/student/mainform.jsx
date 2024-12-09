@@ -3,14 +3,16 @@
  import { useForm } from 'react-hook-form';
  import {NodeElement_TO_Array} from '../../../utils/node_Converter'
  import {GetRawData} from '../../../utils/fetch'
+import { useCookies } from 'react-cookie';
+
     // BUG::when user click the address same than this well not pass data in home address
     
 
-  // import {MultiREF} from '../../../utils/ref'
-  // TODO:: When user prase enter than going to next fild if all fild is fill than go the gigster button
- //  TDDO:: applay loding animation inall over the page with alate
- //   TODO:: Fix the BUG That Apiar in React form
-//   TODO:: Writing the logic in backend for collage rigstion
+  //    import {MultiREF} from '../../../utils/ref'
+  //    TODO:: When user prase enter than going to next fild if all fild is fill than go the gigster button
+  //    TDDO:: applay loding animation inall over the page with alate
+  //    TODO:: Fix the BUG That Apiar in React form
+  //    TODO:: Writing the logic in backend for collage rigstion
 
 
 
@@ -21,17 +23,19 @@
     const [Home_DataClone , setHome_DateClon] = useState({})
     const [previusVal , setpreviusVal] = useState([{Name:"",target:""}])
     const [IsLoding , setIsLoading] = useState(false)
-    const originalRef = useRef(null)
-    const cloneRef = useRef(null)
+    const original_inputRef = useRef(null)
+    const clone_inputRef = useRef(null)
+    const [GetCokkie , setCokkie] = useCookies(['AuthName' , 'Authorization'])
 
     const{register , handleSubmit,
       formState: { errors },
+      setValue,
       watch,
     }=useForm();
     
     
         
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
       setIsLoading(!IsLoding)
 
@@ -97,68 +101,54 @@
       }
 
       console.log(data)
-      // const rigster = GetRawData('POST', "/collage/collageRigster" , Student_Registration_Required_Data)
-       // TODO:: pass that data in Student Profile 
-      setTimeout(() => {
+        const rigster = await GetRawData('POST', "/student/studentRigster" , Student_Registration_Required_Data , GetCokkie.Authorization)
+        console.log(rigster)
         setIsLoading(false)
-      }, 200);
+      
+       // TODO:: pass that data in Student Profile 
 
+      
     }
 
+    const isAddressSame = ()=>{
+      
+      const original = {}
+
+      
+      original_inputRef.current.querySelectorAll("input").forEach((inputs)=>{
+        original[inputs.getAttribute("_id")] = inputs.value
+      })
+
+      original_inputRef.current.querySelectorAll("select").forEach((inputs)=>{
+        original[inputs.getAttribute("_id")] = inputs.value
+      })
+      
+      console.log(original)
+
+      clone_inputRef.current.querySelectorAll("input").forEach((inputs)=>{
+        
+        Object.entries(original).forEach(([key , value])=>{
+          if (inputs.getAttribute("_id") == key) {
+            inputs.value = value
+            setValue(inputs.name,value)
+          }
+        })
+        
+      })
+
+      clone_inputRef.current.querySelectorAll("select").forEach((inputs)=>{
+        Object.entries(original).forEach(([key , value])=>{
+          if (inputs.getAttribute("_id") == key) {
+            inputs.value = value
+            setValue(inputs.name,value)
+          }
+        })
+        
+      })
+       
+    }
     // asing the privius  when the user is un teke the chake box
 
-    useEffect(()=>{
-          if (addressSame) {
-            setDateClon({...watch()})
-            setHome_DateClon({...watch()})
-          }
-          if(!addressSame){
-            inputRef.current. = null
-            setDateClon(undefined)
-            setHome_DateClon(undefined)
-          }
-          if (!addressSame && previusVal!=[]) {
-            const Htmlelement = NodeElement_TO_Array(inputRef)
-            
-            
-
-            for(let i=0 ; i < Htmlelement.length ;i++){
-              
-              if (Htmlelement[i].name == previusVal[i+1]?.Name ) {
-                Htmlelement[i]. =  previusVal[i+1]?.target
-              }
-
-            }
-          }
-         
-    },[watch,addressSame , setDateClon ,previusVal, setHome_DateClon ])
-  
-    const assignPrev  = (event) =>{
-        const TragetName = event.target?.name
-        const Target  = event.target?.
-        
-      setpreviusVal((preval)=>UpdatePriveVal(preval))
-      function UpdatePriveVal(preval) {
-
-        let setval 
-        let TrgetdObj = [...preval].find((name)=> name.Name === TragetName) || undefined
-
-         if(TrgetdObj){
-          TrgetdObj.target = Target
-          setval = [...preval]
-         }
-         else{
-          setval = [...preval,{Name:TragetName,target:Target}]
-         }
-         return setval
-      }
-      
-      setDateClon(event.data)
-      setHome_DateClon(event.data)
-      setAddressSame(false)
-
-    } 
-    
    return (
        <>
        <form onSubmit={handleSubmit(onSubmit)}>
@@ -171,9 +161,9 @@
                     <Input
                             {...register("Mobile_Number", {
                               required: "Mobile Number is required",
-                              validate: {
+                              val_idate: {
                                 matchPattern: () =>
-                                  /^\+?[1-9]\d{1,14}$/.test() || "Invalid mobile number"
+                                  /^\+?[1-9]\d{1,14}$/.test() || "Inval_id mobile number"
                               }
                             })}
                               LacleClass = "font-Assistant text-BLACK font-bold text-md"
@@ -245,9 +235,9 @@
 
 
         {/* Address */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="gr_id gr_id-cols-1 md:gr_id-cols-2 gap-8">
         {/* Current Address Section */}
-        <div>
+        <div ref={original_inputRef}>
         <span className=' flex justify-center'>
                 <div className="text-lg flex justify-center font-bold w-44 text-BLACK bg-DIP-yellow font-Assistant rounded-3xl mb-4">
                     <span className='pl-3 text-lg -mt-[1px] mr-2 '>Current Address </span>
@@ -259,7 +249,7 @@
             <div className="flex gap-4">
 
             <div className="relative w-full md:w-1/2">
-                <select  {...register("selectCountry")} className=" focus:text-black w-full text-white bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl  appearance-none">
+                <select _id="select:-1" {...register("selectCountry")} className=" focus:text-black w-full text-white bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl  appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base  rounded-xl'>Albania</option>
                         <option className='text-base  rounded-xl'>Algeria</option>
@@ -271,7 +261,7 @@
 
                 <div className="relative w-full md:w-1/2">
 
-                <select {...register("selectState")} className=" focus:text-black w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
+                <select _id="select:-2" {...register("selectState")} className=" focus:text-black w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl'>Albania</option>
@@ -286,7 +276,7 @@
             </div>
 
             <Input
-               id=":r1:"
+               _id="input:-1"
               {...register("atpo")}
               
                 placeholder="AT/PO"
@@ -295,19 +285,19 @@
     
 
 
-            <Input id=":r2:" {...register("Village_Area")} type="text" placeholder="Village / Area" className="bg-Nut-PUR focus:text-black  border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+            <Input x='102' _id="input:-2" {...register("Village_Area")} type="text" placeholder="Village / Area" className="bg-Nut-PUR focus:text-black  border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             <div className="flex gap-4">
-              <Input  {...register("City")}  type="text" placeholder="City" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
-              <Input {...register("Pin_code")}  type="text" placeholder="Pin code" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+              <Input _id='input:-3'  {...register("City")}  type="text" placeholder="City" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+              <Input _id='input:-4' {...register("Pin_code")}  type="text" placeholder="Pin code" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             </div>
-            <Input {...register("Nearest_Landmark")} type="text" placeholder="Nearest Landmark" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+            <Input _id='input:-5' {...register("Nearest_Landmark")} type="text" placeholder="Nearest Landmark" className="bg-Nut-PUR focus:text-black border-white peer placeholder-slate-200 text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
           </div>
           
         </div>
         
       
         {/* Home Address Section */}
-        <form ref={inputRef}>
+        <form ref={clone_inputRef}>
         <span className=' flex justify-center'>
                 <div className="text-lg flex justify-center font-bold w-44 text-BLACK bg-DIP-yellow font-Assistant rounded-3xl mb-4">
                     <span className='pl-4 text-lg -mt-[1px] mr-4 '>Home Address </span>
@@ -319,7 +309,7 @@
 
 
             <div className="relative w-full md:w-1/2">
-                <select   {...register("Home_selectCountry") }  className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
+                <select _id="select:-1"  {...register("Home_selectCountry") }  className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base  rounded-xl'>Albania</option>
                         <option className='text-base  rounded-xl'>Algeria</option>
@@ -331,7 +321,7 @@
 
                 <div className="relative w-full md:w-1/2">
 
-                <select  {...register("Home_selectState")}   className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
+                <select _id="select:-2" {...register("Home_selectState")}   className="w-full bg-Nut-PUR p-2 text-center font-bold text-xl font-Assistant rounded-xl text-white appearance-none">
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl' >India</option>
                         <option className='text-base rounded-xl'>Albania</option>
@@ -348,7 +338,7 @@
             <Input
                 
                 {...register("Home_atpo")}
-                 
+                 _id="input:-1"
                 placeholder="AT/PO"
                 className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"
           />
@@ -356,15 +346,17 @@
 
 
             <Input  
-           
+            _id="input:-2"
             {...register("Home_Village_Area")}    type="text" placeholder="Village / Area" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             <div className="flex gap-4">
               <Input   
-             
+             _id="input:-3"
               {...register("Home_City")}   type="text" placeholder="City" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
-              <Input  {...register("Home_Pin_code")}   type="text" placeholder="Pin code" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
+              <Input _id="input:-4" {...register("Home_Pin_code")}   type="text" placeholder="Pin code" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
             </div>
             <Input  
+              
+              _id="input:-5"
               
               {...register("Home_Nearest_Landmark")}   type="text" placeholder="Nearest Landmark" className="bg-Nut-PUR  border-white peer placeholder-slate-200 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded"/>
           </div>
@@ -380,7 +372,7 @@
          {/* same AddressChaker */}
 
     <div className='h-full w-32'>
-          <label className="flex items-center text-gray-600 cursor-pointer mt-2">
+          <label onClick={isAddressSame} className="flex items-center text-gray-600 cursor-pointer mt-2">
                           <input
                             // {...register("chekBox")}
                             type="checkbox"

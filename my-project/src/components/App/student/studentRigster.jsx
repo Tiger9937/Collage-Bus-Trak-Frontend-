@@ -25,10 +25,12 @@ const StudentRegistration = () => {
     
     
     useEffect(()=>{
+      
       (async()=>{
         const GetuserInfo = await GetparamsData(GetCokkie.AuthName , GetCokkie.Authorization)
         setUserInfo(GetuserInfo.data.user)
       })();
+
     },[])
 
     // const handle_BTN_outside_Click = (event)=>{
