@@ -16,9 +16,9 @@ import UserInfo from './App/userInfo'
 import UserWork from './App/userWork'
 import ProfileIcon from './common/svg/profileIcon'
 import AuthLayout from './Auth/AuthLayout'
-import StudentRigster from './App/student/studentRigster'
+import StudentRigster from './App/student/CollageRigster'
 import Scorebar from './common/scorebar'
-
+import CollageRigstre from './App/collage/CollageRigstre'
 
 export{
     Button,
@@ -40,5 +40,6 @@ export{
     ProfileIcon,
     AuthLayout,
     StudentRigster,
-    Scorebar
+    Scorebar,
+    CollageRigstre
 }

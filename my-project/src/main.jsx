@@ -11,7 +11,8 @@ import {
   Login,
   Singup,
   ProfilePage,
-  Rigstation
+  Rigstation,
+  CollageRigster_page
   } from './pages/pageIndex.js'
 
 
@@ -80,6 +81,12 @@ const router = createBrowserRouter([
                      <Rigstation/>
           )
         },
+        {
+          path: "/CollageRigster",
+          element:(
+                     <CollageRigster_page/>
+          )
+        }
         
     ],
 },

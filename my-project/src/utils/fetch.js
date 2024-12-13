@@ -1,5 +1,6 @@
 //POST
 async function  fetchFunction(methord,url,info){
+     console.log("Body INfo",info)
     try {
         const data = await fetch(`${'http://localhost:8000/api/v1'+url}`,{
             method:methord,
