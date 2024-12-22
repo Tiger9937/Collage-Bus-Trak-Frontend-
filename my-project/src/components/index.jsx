@@ -19,6 +19,7 @@ import AuthLayout from './Auth/AuthLayout'
 import StudentRigster from './App/student/CollageRigster'
 import Scorebar from './common/scorebar'
 import CollageRigstre from './App/collage/CollageRigstre'
+import Faculty from './App/collage/FacultyRigster'
 
 export{
     Button,
@@ -41,5 +42,6 @@ export{
     AuthLayout,
     StudentRigster,
     Scorebar,
-    CollageRigstre
+    CollageRigstre,
+    Faculty
 }

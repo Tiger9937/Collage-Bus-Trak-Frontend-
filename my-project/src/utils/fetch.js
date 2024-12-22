@@ -1,6 +1,5 @@
 //POST
 async function  fetchFunction(methord,url,info){
-     console.log("Body INfo",info)
     try {
         const data = await fetch(`${'http://localhost:8000/api/v1'+url}`,{
             method:methord,
@@ -62,5 +61,20 @@ async function GetPublicParamsData(info) {
 
 }
 
+// POST
+async function GetDataWithFile(method, url, Dataform) {
+    
+    try {   
+        const response = await fetch(`http://localhost:8000/api/v1${url}`, {
+            method: method, 
+            body: Dataform,
+        });
+        
+        return await response.json();
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}
 
-export {fetchFunction ,GetRawData , GetparamsData , GetPublicParamsData}
+
+export {fetchFunction ,GetRawData , GetparamsData , GetPublicParamsData , GetDataWithFile}

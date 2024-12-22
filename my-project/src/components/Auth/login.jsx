@@ -71,11 +71,11 @@ export default function Login() {
   return (
     <div>
       {loading && <span>Loading.....</span>}
-      <form className='m-4 space-y-4' onSubmit={handleSubmit(onSubmit)}>
+      <form className='m-2 space-y-4' onSubmit={handleSubmit(onSubmit)}>
         
         <Input
           placeholder="Enter Your Email"
-          className="bg-deep-purple placeholder-white border-white"
+          className="w-full px-4 py-3 text-white font-bold bg-deep-purple  border-white rounded-3xl sm:rounded-lg  placeholder-white  focus:outline-none focus:bg-white focus:text-black hover:border-blue-500 border-2 hover:border-4 transition-all"
           {...register("email", {
             required: "Email is required",
             validate: {
@@ -89,21 +89,22 @@ export default function Login() {
 
         <Input
           placeholder="Enter Your Password"
-          className="bg-deep-purple border-white placeholder-white"
+          className="w-full px-4 py-3 text-white font-bold bg-deep-purple  border-white rounded-3xl sm:rounded-lg  placeholder-white  focus:outline-none focus:bg-white focus:text-black hover:border-blue-500 border-2 hover:border-4 transition-all"
           {...register("password", {
             required: "Password is required"
           })}
         />
         {errors.password && <Errors>{errors.password.message}</Errors>}
-
+        <div className="align justify-center text-center">
         <Button
           type='submit'
-          className="w-full p-3 hover:bg-slate-50 bg-white text-black rounded-lg shadow-lg mt-4"
+          className="w-[50%] md:w-[100%] px-4 py-2 font-bold text-black bg-white border-2 border-black  rounded-3xl sm:rounded-lg  shadow-md hover:border-blue-500 hover:shadow-lg hover:bg-gray-100 transition-all hover:border-3"
         >
           {loading ? <span>Loading.....</span> : <span>Login</span>}
         </Button>
 
         {loading && <Loading />} {/* Show loading component if loading is true */}
+        </div>
       </form>
       {errorState && <Errors>{error}</Errors>}
     </div>

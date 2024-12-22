@@ -12,7 +12,8 @@ import {
   Singup,
   ProfilePage,
   Rigstation,
-  CollageRigster_page
+  CollageRigster_page,
+  FacultyRigster_page
   } from './pages/pageIndex.js'
 
 
@@ -27,6 +28,7 @@ import {
 import Error from './utils/error/DevError.jsx'
 import {Exparimant} from './components/index.jsx'
 import {AuthLayout} from './components/index.jsx'
+import Test from './components/common/test.jsx'
 
 const router = createBrowserRouter([
   {
@@ -85,6 +87,18 @@ const router = createBrowserRouter([
           path: "/CollageRigster",
           element:(
                      <CollageRigster_page/>
+          )
+        },
+        {
+          path: "/Apitest",
+          element:(
+                     <Test/>
+          )
+        },
+        {
+          path: "/FacultyRigster",
+          element:(
+                     <FacultyRigster_page/>
           )
         }
         

@@ -102,7 +102,6 @@ const StudentRegistration = () => {
 
   );
 };
-// ['Item1' , "Item1" , 'Item1' , 'Item1' , 'Item1' ,'Item1' , 'Item1' , 'Item1' , 'Item1']
 
 export default StudentRegistration;
 

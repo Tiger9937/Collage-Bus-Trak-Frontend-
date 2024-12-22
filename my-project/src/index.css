@@ -111,3 +111,34 @@
   border-radius: rem;
 }
 
+
+
+/* Notification Container */
+.notification {
+  position: absolute;
+  padding: 15px 30px;
+  border-radius: 5px;
+  animation: slideDownBounce 4.8s ease-out;
+}
+
+/* Keyframes for Slide Down and Bounce Animation */
+@keyframes slideDownBounce {
+  0% {
+    top: -100px; /* Off-screen */
+    
+  }
+  20% {
+    top: 20px; /* Final position */
+    
+  }
+  80% {
+    top: 20px; /* Hold position for 5 seconds */
+  }
+  90% {
+    top: 10px; /* Small bounce */
+  }
+  100% {
+    top: 20px; /* Settle back to final position */
+    
+  }
+}
