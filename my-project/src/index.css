@@ -142,3 +142,27 @@
     
   }
 }
+::-webkit-scrollbar {  
+  width: 10px; /* Width of the scrollbar */  
+  height: 15px; /* Height of the scrollbar (for horizontal) */  
+}  
+
+::-webkit-scrollbar-track {  
+  background: #d1e5ff; /* Background of the track */  
+  border-radius: 10px; /* Rounded corners for the track */  
+}  
+
+::-webkit-scrollbar-thumb {  
+  background: linear-gradient(#642bff ,#ff22e6); /* Color of the scrollbar thumb */  
+  border-radius: 10px; /* Rounded corners for the thumb */  
+}  
+
+::-webkit-scrollbar-thumb:hover {  
+  background:linear-gradient(#501bdf ,#cf15b9) /* Color of the thumb when hovered */  
+}  
+
+/* For Firefox */  
+.scrollable-element {  
+  scrollbar-width: thin; /* Make it thinner */  
+  scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */  
+}

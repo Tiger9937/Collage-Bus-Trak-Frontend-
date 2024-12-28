@@ -196,7 +196,7 @@ export default function mainform({ CollageID }) {
                   <option className="text-base rounded-xl">select</option>
                   <option className="text-base rounded-xl">Male 👦🏻</option>
                   <option className="text-base rounded-xl">Female 👧🏻</option>
-                  <option className="text-base rounded-xl">Other ⚧</option>
+                  <option className="text-base rounded-xl">Other ⚧️</option>
                 </select>
                 <span className="absolute top-1/2 text-gray-300 right-3 transform -translate-y-1/2 mt-3 pointer-events-none">
                   ▼
