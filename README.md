@@ -55,6 +55,8 @@ npm run dev
 ```bash
 npm run dev
 ```
+## Project Figma
+https://www.figma.com/design/OPIPQADw6X3dZQjk0fieVB/College-Bus?node-id=0-1&p=f&t=h2UphY5PNvEWi2Pf-0
 ## 📊 Project Status
 
 - **Frontend Development**: In Progress ⏳
