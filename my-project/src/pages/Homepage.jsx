@@ -2,25 +2,29 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sidebar , Tab , Container , Button } from '../components';
 import { useCookies } from 'react-cookie'
+ import {Logout} from '../settings/Logout.setting'
+import {SentREQInserver} from '../utils/fetch'
+
 
 export default function Homepage() {
   
   const [isSidebar, setSidebar] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [GetCokkie , setCokkie] = useCookies(['AuthName' , 'Authorization'])
   
-
- 
-
+  
+  
+  
   const handleSideBarClick = () => {
     setSidebar(!isSidebar);
   };
-
+  
   const handleKeyDown = (event) => {
     if (event.key === 'Escape') {
       setSidebar(false);
     }
   };
-
+  
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -50,15 +54,18 @@ export default function Homepage() {
         )}
       </div>
 
-
-
-
-
       {/* Top Navigation  for big display */}
       <div 
         className={`w-full sm:fixed scrollbar-hide items-center justify-between bg-white overflow-x-scroll block 
         sm:flex `}
       >
+        <button className='bg-black caret-golden-yellow text-white'
+        onClick={async()=>{
+          // console.log(GetCokkie.Authorization)
+          const isuerLogout = await Logout()
+          console.log(isuerLogout)
+        }}
+        >Logout</button>
         <div className='sm:flex flex-col items-center ml-10 hidden'>
           <img
             onClick={handleSideBarClick}

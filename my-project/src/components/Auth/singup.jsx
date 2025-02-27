@@ -3,11 +3,14 @@ import { Input, Button } from "../index";
 import { useForm } from "react-hook-form";
 import Errors from "../../utils/error/DevError";
 import Come from "../../utils/error/error";
-
-import { fetchFunction } from "../../utils/fetch";
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { get_formData } from "../../utils/fetch";
+import { useNavigate } from "react-router-dom";
 import { DataStorege } from "./../../store/ComponentStore";
 import { Loading } from "../index";
+import {useCookies} from 'react-cookie'
+import AutoLogin from "../../settings/autoLogin";
+import {subscribe} from '../App/Subscribe_receiver'
 
 export default function Signup() {
   const {
@@ -19,6 +22,10 @@ export default function Signup() {
   const [errorState, setErrorState] = useState(false);
   const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [email,setemail] = useState(null)
+  const [password,setpassword] = useState(null)
+  const [GetCokkie , setCokkie] = useCookies(['AuthName' , 'Authorization'])
+  const navigate = useNavigate();
 
   const onSubmit = async (data, event) => {
     console.log("ClickEvent: ", event);
@@ -37,23 +44,31 @@ export default function Signup() {
       formData.append("usename", usename);
 
       setLoading(true);
-      const user = await fetchFunction("POST", "/users/regidter", formData);
+      const user = await get_formData("POST", "/users/regidter", formData);
       console.log(user);
       if (user.success) {
-        setRedirect(true);
-        DataStorege(usename, true, true);
+        DataStorege(usename, email , password );
+        const user = await AutoLogin()
+        
+        if(user){
+           console.log("cokke Data::",user)
+          setCokkie('Authorization' , user)
+          // subscribe for notification
+          subscribe()
+          setRedirect('GoHome')
+          setLoading(false);
+          navigate("/"); 
+        }
       }
       setLoading(false);
+
+
     } catch (error) {
       setLoading(false);
       setErrorState(true);
       setError(error.message);
     }
   };
-
-  if (redirect) {
-    return <Navigate to="/login" />;
-  }
 
   return (
     <div className="">
@@ -115,10 +130,10 @@ export default function Signup() {
       
       </form>
       {loading && <Loading />}
-      {errors.Full_Name && <Errors>{errors.Full_Name.message}</Errors>}
+      {/* {errors.Full_Name && <Errors>{errors.Full_Name.message}</Errors>}
       {errors.email && <Errors>{errors.email.message}</Errors>}
       {errors.password && <Errors>{errors.password.message}</Errors>}
-      {errorState && <Errors>{error}</Errors>}
+      {errorState && <Errors>{error}</Errors>} */}
     </div>
 
   );

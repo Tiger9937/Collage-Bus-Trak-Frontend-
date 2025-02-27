@@ -1,10 +1,10 @@
 import React from 'react'
-import {Faculty} from '../../components/index'
+import {FacultyRigster} from '../../components/index'
 
 export default function FacultyRigster_page() {
   return (
     <div>
-      <Faculty/>
+      <FacultyRigster/>
     </div>
   )
 }

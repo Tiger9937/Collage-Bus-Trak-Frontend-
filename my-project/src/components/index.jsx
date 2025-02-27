@@ -19,7 +19,11 @@ import AuthLayout from './Auth/AuthLayout'
 import StudentRigster from './App/student/CollageRigster'
 import Scorebar from './common/scorebar'
 import CollageRigstre from './App/collage/CollageRigstre'
-import Faculty from './App/collage/FacultyRigster'
+import FacultyRigster from './App/collage/faculty/FacultyRigster'
+
+import ProjectUpload from './App/project/upload/projectuplode'
+import ViewProject from './App/project/ViewProject'
+
 
 export{
     Button,
@@ -43,5 +47,7 @@ export{
     StudentRigster,
     Scorebar,
     CollageRigstre,
-    Faculty
+    ProjectUpload,
+    ViewProject,
+    FacultyRigster
 }

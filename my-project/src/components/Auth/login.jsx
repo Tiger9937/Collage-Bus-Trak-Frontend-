@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, Button } from '../index';
 import { useForm } from "react-hook-form";
 import Errors from '../../utils/error/DevError';
@@ -9,7 +9,7 @@ import { Loading } from '../index';
 import { login } from '../../store/Slices/AuthSlise';
 import { useDispatch, useSelector } from 'react-redux';
 import {useCookies} from 'react-cookie'
-
+import {subscribe} from '../App/Subscribe_receiver'
 
 // explor more fitcher
 
@@ -23,8 +23,6 @@ export default function Login() {
   const [redirect, setRedirect] = useState(false);
   const [GetCokkie , setCokkie] = useCookies(['AuthName' , 'Authorization'])
   const dispatch = useDispatch();
-
-  
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -53,6 +51,8 @@ export default function Login() {
         setCokkie("AuthName" , userData.usename)
         
         setRedirect(true); 
+        // subscribe for notification
+        subscribe()
       } else {
         throw new Error("Login failed");
       }
@@ -63,6 +63,8 @@ export default function Login() {
       setLoading(false);
     }
   };
+
+  
 
   if (redirect) { 
     return <Navigate to='/profile' />;

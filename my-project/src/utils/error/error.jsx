@@ -3,30 +3,48 @@ import React, { useEffect, useRef, useState } from "react";
 function Error(props) {
   const [isError, setIsError] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [Is_Noification_Stop,Set_IsNoification_Stop] = useState(false)
 
   const notification = useRef(null)
+  
   const handleClose = () => {
     setIsError(false);
   };
 
-  useEffect(() => {
-     const Not = notification.current
-    setTimeout(() => {
-        Not.style.display = "none";
-    }, 4500);
-  }, []);
   const handleToggle = () => {
     setIsExpanded((prev) => !prev);
+    Set_IsNoification_Stop(true)
   };
+  
+  
+
+
+  useEffect(() => {
+    const Not = notification.current
+      Promise.resolve(
+        setTimeout(()=>{
+           console.log("hello")
+        },4500),
+      )
+
+      console.log("world")
+      
+
+          setTimeout(()=>{
+            if (Is_Noification_Stop) {
+              Not.style.display = "inline";
+            }else{
+              Not.style.display = "none";
+            }
+          },4500) 
+  }, [handleToggle,Is_Noification_Stop]);
+  
 
   return (
     <>
       {isError && (
-
-
-            
-
-              <div ref={notification} style={{top:`${0}px`}} className="flex notification absolute flex-col items-center w-full max-w-sm p-3 bg-red-400 border border-red-300 rounded-lg shadow-lg scale-75 sm:scale-100">
+          
+              <div ref={notification} style={{top:`${20}px`}} className={`flex ${Is_Noification_Stop ? "" :"notification"} absolute flex-col items-center w-full max-w-sm p-3 bg-red-400 border border-red-300 rounded-lg shadow-lg scale-75 sm:scale-100`}>
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center">
                     <div className="h-10 w-10 flex items-center justify-center rounded-full bg-white">
@@ -110,9 +128,6 @@ function Error(props) {
                   </div>
                 )}
               </div>
-              
-            
-        
       )}
     </>
   );

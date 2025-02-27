@@ -26,7 +26,9 @@ export default {
         'dimLight':'#F2F2F2',
         'Hover-yellow':'#fac241',
         'BLACK' : "#262626",
-        "Nut-PUR" : "#8E54DA"
+        "Nut-PUR" : "#8E54DA",
+        "Light-Dir-purple":"#B379FF",
+        "Natural-yellow": "#E4BD1E"
       },
       width:{
         "120" : "26rem"

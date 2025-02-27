@@ -13,16 +13,13 @@ import {
   ProfilePage,
   Rigstation,
   CollageRigster_page,
+  UploadProject,
+  ViewProject,
   FacultyRigster_page
   } from './pages/pageIndex.js'
 
 
-
   import { CookiesProvider } from 'react-cookie'; 
-
-
-
-
 
 
 import Error from './utils/error/DevError.jsx'
@@ -90,27 +87,33 @@ const router = createBrowserRouter([
           )
         },
         {
+          path: "/FacultyRigster",
+          element:(
+                     <FacultyRigster_page/>
+          )
+        },
+        {
           path: "/Apitest",
           element:(
                      <Test/>
           )
         },
         {
-          path: "/FacultyRigster",
+          path: "/Projectupload",
           element:(
-                     <FacultyRigster_page/>
+            <UploadProject/>
+          )
+        },
+        {
+          path: "/ViewProject",
+          element:(
+            <ViewProject/>
           )
         }
         
     ],
 },
 ])
-
-
-
-
-
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -119,5 +122,18 @@ createRoot(document.getElementById('root')).render(
           <RouterProvider router={router}/> 
           </Provider>
     </CookiesProvider>
-  </StrictMode>,
+  </StrictMode>, 
 )
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+      navigator.serviceWorker
+          .register('/service-worker.js')
+          .then((registration) => {
+              console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch((error) => {
+              console.error('Service Worker registration failed:', error);
+          });
+  });
+}

@@ -1,16 +1,12 @@
 
-function DataStorege(info,want,isDelete){
+function DataStorege(usename, email , password){
     try {
-        if(want){
-            if (info) {
-                localStorage.setItem('username',info)
-            }
-            return localStorage.getItem('username')
-        }
-        if(isDelete){
-            localStorage.removeItem('username');
-            console.log('delet success full')
-        }
+        
+    localStorage.setItem('username',usename)
+    localStorage.setItem('email',email)
+    localStorage.setItem('password',password)
+    
+            
     } catch (error) {
         console.log("error",error)
     }

@@ -1,8 +1,11 @@
 //POST
-async function  fetchFunction(methord,url,info){
+async function fetchFunction(methord,url,info){
     try {
         const data = await fetch(`${'http://localhost:8000/api/v1'+url}`,{
             method:methord,
+            headers: {
+                "Content-Type": "application/json"  // Important!
+            },
             body:info
         })
         if (!data) {
@@ -25,6 +28,21 @@ async function GetRawData(methord,url,info,AuthorizationTokeen) {
                     body: JSON.stringify(
                         info
                     ),
+                })
+                return await user.json()
+        } catch (error) {
+            console.log("error",error)
+        }
+}
+
+async function SentREQInserver(methord,url,AuthorizationTokeen) {
+        try {
+                const user = await fetch(`${"http://localhost:8000/api/v1"+url}`, {
+                    method: methord, 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization':AuthorizationTokeen 
+                    },
                 })
                 return await user.json()
         } catch (error) {
@@ -67,8 +85,9 @@ async function GetDataWithFile(method, url, Dataform) {
     try {   
         const response = await fetch(`http://localhost:8000/api/v1${url}`, {
             method: method, 
-            body: Dataform,
+            body: Dataform
         });
+        
         
         return await response.json();
     } catch (error) {
@@ -76,5 +95,40 @@ async function GetDataWithFile(method, url, Dataform) {
     }
 }
 
+async function get_formData(methord,url,info){
+    try {
+        const data = await fetch(`${'http://localhost:8000/api/v1'+url}`,{
+            method:methord,
+            
+            body:info
+        })
+        if (!data) {
+            console.log("data is not coming")
+        }
+        return await data.json()
+    } catch (error) {
+        console.log("error",error)
+    }
+}
 
-export {fetchFunction ,GetRawData , GetparamsData , GetPublicParamsData , GetDataWithFile}
+// only for notification (POST)
+async function SendData_in_Server(method, url, Subscribed_Data) {
+    try {
+        await fetch(`http://localhost:8000/api/v1${url}`, {
+            method: method, 
+            body: JSON.stringify(Subscribed_Data)
+        });
+        console.log("broke point ")
+
+        const data = true
+        return data;
+    } catch (error) {
+        console.log('Error:', error);
+        return false
+    }
+}
+
+
+export {fetchFunction ,GetRawData , 
+    GetparamsData , GetPublicParamsData , GetDataWithFile , 
+    SendData_in_Server , SentREQInserver, get_formData}
