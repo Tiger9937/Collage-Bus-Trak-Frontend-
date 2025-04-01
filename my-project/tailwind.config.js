@@ -10,7 +10,8 @@ export default {
         'strong': '1.5px 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.5)',
       },
       colors: { 
-        
+        'nut_purpal':"#8954DA",
+        'extra_dark_purple':"#412966",
         'deep-purple': '#4B168B',  
         "hover-purpal": "#743fb7",
         'golden-yellow': '#FBCF30',   
@@ -36,6 +37,7 @@ export default {
       placecolors: {
         placeholder: '#ffffff', // Custom placeholder color
       }
+      
     },
     fontFamily:{
       Itim: ["Itim", 'cursive'],

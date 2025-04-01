@@ -34,6 +34,7 @@ export default function collegeRigsterForm() {
         "Fakir Mohan University", "North Orissa University", "Ravenshaw University",
         "Kalahandi University", "Hallikote University"
     ];
+    
     const CourseData = [
         "B.Tech", "M.Tech", "MBA", "BBA", "BCA", "MA", "BBA", "BCom", "MCom",
         "BTech", "MTech", "BPharm", "MPharm", "BEd",
@@ -230,18 +231,20 @@ export default function collegeRigsterForm() {
       <Input {...register("phone", { required: "Phone is required" })} LacleClass="font-Assistant text-BLACK font-bold text-md" label="Phone:" className="bg-Nut-PUR border-white peer placeholder-slate-200 focus:text-black text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded" />
     </div>
     <div>
+
       <label className="font-Assistant text-BLACK font-bold text-md">Own by:</label>
       <select
-        name="ownBy"
-        {...register("ownBy")}
-        value={setownby}
-        onChange={handleSelectChange}
-        className="focus:text-gray-300 w-full mt-1 text-white bg-Nut-PUR p-2 text-center font-bold text-md font-Assistant rounded-md"
-      >
-        <option value="">Select</option>
-        <option value="Government">Government</option>
-        <option value="Private">private</option>
-      </select>
+  name="ownBy"
+  {...register("ownBy")}
+  value={ownby} // Use the state variable, not the setter function
+  onChange={handleSelectChange}
+  className="focus:text-gray-300 w-full mt-1 text-white bg-Nut-PUR p-2 text-center font-bold text-md font-Assistant rounded-md"
+>
+  <option value="">Select</option>
+  <option value="Government">Government</option>
+  <option value="Private">Private</option>
+</select>
+
     </div>
     <div>
       <Input {...register("OwnerName", { required: "Owner Name is required" })} LacleClass="font-Assistant text-BLACK font-bold text-md" label="Owner Name" className="bg-Nut-PUR border-white peer placeholder-slate-200 focus:text-black text-white focus:outline-none focus:ring-2 focus:ring-black focus:border-black p-2 border rounded" />
@@ -301,7 +304,7 @@ export default function collegeRigsterForm() {
         {/* Button */}
         {!Course_Visible ? (
           <button className="flex items-center text-xl gap-2 w-full justify-between bg-Nut-PUR text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-600 transition-all" onClick={() => setCourse_Visible(true)}>
-            {selectedCourses.length > 0 ? selectedCourses.join(", ") : "Select Course"}
+            {"Search Course"}
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -314,7 +317,7 @@ export default function collegeRigsterForm() {
           <ul className="mt-2 max-h-40 overflow-y-auto absolute w-full glass bg-white z-10 border border-gray-300 rounded-md">
             {Course_Filtered.length > 0 ? (
               Course_Filtered.map((Course) => (
-                  <li key={Course} className="text-gray-900 gap-2 p-1 hover:pl-2 hover:bg-hover-purpal rounded-md hover:text-white" onClick={() => selecyUniversity(Course)}>
+                  <li key={Course} className="text-gray-900 gap-2 p-1 hover:pl-2 hover:bg-hover-purpal rounded-md hover:text-white" onClick={() => selecyCourse(Course)}>
                     {Course}
                </li>
       ))
@@ -333,10 +336,24 @@ export default function collegeRigsterForm() {
 
   <div className="flex flex-wrap gap-2 mb-2">
     {selectedCourses.map((course) => (
-      <div key={course} className="bg-purple-600 py-1 px-3 rounded-full flex items-center gap-2">
-        <span className="text-white">{course}</span>
-        <button onClick={() => removeCourse(course)} className="text-white">X</button>
-      </div>
+      <div 
+  key={course} 
+  className="bg-nut_purpal hover:bg-extra_dark_purple py-2 px-6 rounded-full flex items-center gap-3 shadow-md transition-all duration-300 ease-in-out"
+>
+  <span className="text-white font-semibold text-lg">{course}</span>
+  
+  <button 
+    onClick={() => removeCourse(course)} 
+    className="flex items-center justify-center bg-red-500 hover:bg-red-600 p-2 rounded-full transition-transform duration-200 hover:scale-110"
+  >
+    <img 
+      src="/svg/DEL.svg" 
+      className="w-5 h-5" 
+      alt="Delete"
+    />
+  </button>
+</div>
+
     ))}
   </div>
 
@@ -413,7 +430,14 @@ export default function collegeRigsterForm() {
       Submit
     </button>
   </div>
-</form>
+        </form>
+
+        {/* search user */}
+        <div class="bg-white flex px-1 py-1 rounded-full border border-blue-500 overflow-hidden max-w-md mx-auto font-[sans-serif]">
+        <input type='email' placeholder='Search Something...' class="w-full outline-none bg-white pl-4 text-sm" />
+        <button type='button'
+          class="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5">Search</button>
+      </div>
           
         </>
     );

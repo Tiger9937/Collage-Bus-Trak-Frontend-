@@ -81,4 +81,20 @@ async function GetparamsData(method,url,paramsData) {
 }
 
 
-export{Privet_POST_request_Send_Subscription_Data , Privet_POST_request , GetDataWithFile , GetparamsData}
+async function GETQurey(method,url,QureyKey,QureyValue) {
+    const cokkie = await GetCokkie()
+    let AuthorizationTokeen  = cokkie.Authorization
+   try {
+        const response = await fetch(`http://localhost:8000/api/v1${url}?${QureyKey}=${QureyValue}`,{
+            method:method,
+            headers: {
+                'Authorization':AuthorizationTokeen 
+            },
+        })
+        return await response.json();
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}
+
+export{Privet_POST_request_Send_Subscription_Data , Privet_POST_request , GetDataWithFile , GetparamsData , GETQurey}
